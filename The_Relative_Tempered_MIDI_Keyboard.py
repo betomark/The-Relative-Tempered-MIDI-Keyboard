@@ -3,6 +3,7 @@ import pygame
 import pygame.midi
 from pygame.locals import *
 from giantwin32 import *
+from relative_tempered_generator import nextNoteFrecuency, chord
 
 pygame.init()
 
@@ -12,12 +13,12 @@ event_post = pygame.fastevent.post
 
 pygame.midi.init()
 input_id = pygame.midi.get_default_input_id()
-i = pygame.midi.Input( input_id )
+i = pygame.midi.Input(input_id)
 
 pygame.display.set_caption("midi test")
 screen = pygame.display.set_mode((400, 300), RESIZABLE, 32)
 
-print "starting"
+print("starting")
 
 going = True
 
@@ -32,18 +33,12 @@ while going:
 
         if i.poll():
                 midi_events = i.read(10)
-                if int(midi_events[0][0][0]) in [224,225,226]:#Pitch Bender
-                        print str(midi_events[0][0][2])#right(0)  center(64)  left(124)
-                        
-                #print "full midi_events " + str(midi_events)
-                    #print "my midi note is " + str(midi_events[0][0][1])
-                # convert them into pygame events.
-                midi_evs = pygame.midi.midis2events(midi_events, i.device_id)
+                print(midi_events)
+                if int(midi_events[0][0][0]) in [224, 225, 226]:
+                    print(str(midi_events[0][0][2]))
 
-                for m_e in midi_evs:
-                        event_post( m_e )
 
-print "exit button clicked."
+print("exit button clicked.")
 i.close()
 pygame.midi.quit()
 pygame.quit()

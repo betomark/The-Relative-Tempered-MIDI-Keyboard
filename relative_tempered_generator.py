@@ -28,5 +28,9 @@ def chord(root, listOfDistances):
     return res
 
 
+def getKeysDistance(key_origin, key_destiny):
+    pass
+
+
 def noteHarmonic(note_frecuency):
     pass
